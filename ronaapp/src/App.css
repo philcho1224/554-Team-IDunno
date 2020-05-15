@@ -51,6 +51,19 @@ button{
     border-radius	: 50px;
 }
 
+button:hover {
+    background: rgb(75, 107, 167);
+    color     : white;
+}
+
+input{
+	/* width: 100%; */
+	padding		: 12px 20px;
+	margin		: 8px 10px;
+	border		: none;
+	border-radius	: 50px;
+  background: #cccccc;
+}
 
 @keyframes App-logo-spin {
   from {
