@@ -72,9 +72,9 @@ function SignUp() {
                         </FormControl>
                     </Box>
 
-                    <Box mt={4}>
+                    <Box mt={4} mb={2}>
                         <Button type="submit" variant="contained" color="primary" fullWidth>
-                            Log in
+                            Sign Up
                         </Button>
                     </Box>
 

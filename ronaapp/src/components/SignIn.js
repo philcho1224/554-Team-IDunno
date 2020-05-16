@@ -9,6 +9,7 @@ import {
 import { FormControl, InputLabel, Input, FormHelperText, ButtonGroup, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 
 function SignIn() {
     const { currentUser } = useContext(AuthContext);
@@ -59,14 +60,26 @@ function SignIn() {
                             <Input id="password" type="password" />
                         </FormControl>
                     </Box>
-                    <Button type="submit" variant="contained" color="primary">
-                        Log in
-                    </Button>
-                    <Button onClick={passwordReset}>
-                        Forgot Password
-                    </Button>
+                    <Box mt={5}>
+                        <Button type="submit" variant="contained" color="primary" fullWidth >
+                            Log in
+                        </Button>
+                    </Box>
+                    <Box mt={1}>
+                        <Grid container fullWidth>
+                            <Grid item xs>
+                                <Button onClick={passwordReset}>
+                                    Forgot Password
+                            </Button>
+                            </Grid>
+                            <Grid item>
+                                <SocialSignIn />
+                            </Grid>
+
+                        </Grid>
+                    </Box>
+
                 </form>
-                <SocialSignIn />
 
 
             </Container>
