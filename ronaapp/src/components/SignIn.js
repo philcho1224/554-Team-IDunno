@@ -6,7 +6,6 @@ import {
   doSignInWithEmailAndPassword,
   doPasswordReset
 } from '../firebase/FirebaseFunc';
-import TextField from '@material-ui/core/TextField';
 import { FormControl, InputLabel, Input, FormHelperText, ButtonGroup, Button } from '@material-ui/core';
 
 function SignIn() {
@@ -55,10 +54,10 @@ function SignIn() {
                     <Input id="password" type="password" aria-describedby="password-helper-text" />
                     <FormHelperText id="password-helper-text">Chose a good one.</FormHelperText>
                 </FormControl>
-                <Button type="submit">
+                <Button type="submit" variant="contained" color="primary">
                     Log in
                 </Button>
-                <Button variant="contained" color="secondary" onClick={passwordReset}>
+                <Button onClick={passwordReset}>
                     Forgot Password
                 </Button>
             </form>

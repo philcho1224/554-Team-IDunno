@@ -60,7 +60,7 @@ const NavOnAuth = () => {
         <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/market">Marketplace</Button>
         <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/account">Account</Button>
         <div className={classes.grow} />
-        <Button color="inherit" onClick={doSignOut}>Sign Out</Button> 
+        <Button color="inherit" onClick={doSignOut}>Sign Out</Button>
       </Toolbar>
     </AppBar>
   );
@@ -97,7 +97,7 @@ function App() {
         <Route path = '/signup' component = {SignUp} />
       </Router>
     </AuthProvider>
-  ); 
+  );
 }
 
 export default App;
