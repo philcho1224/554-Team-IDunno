@@ -18,6 +18,11 @@ export const AuthProvider = ({ children }) => {
     return <div>Loading....</div>;
   }
 
+  // let { data } = currentUser;
+  // console.log(`currentUser is ${currentUser}`);
+  // console.log(`UID is ${currentUser.uid}`);
+  // console.log(`data is ${data}`);
+
   return (
     <AuthContext.Provider value={{ currentUser }}>
       {children}

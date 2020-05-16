@@ -4,7 +4,7 @@ import { doSocialSignIn } from '../firebase/FirebaseFunc';
 const SocialSignIn = () => {
     const socialSignOn = async (provider) => {
         try {
-        await doSocialSignIn(provider);
+            await doSocialSignIn(provider);
         } catch (error) {
         alert(error);
         }

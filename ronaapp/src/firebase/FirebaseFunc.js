@@ -1,8 +1,32 @@
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 
-async function doCreateUserWithEmailAndPassword(email, password, displayName) {
-  await firebase.auth().createUserWithEmailAndPassword(email, password);
-  firebase.auth().currentUser.updateProfile({ displayName: displayName });
+/********************** Auth Functions ***********************/
+function doCreateUserWithEmailAndPassword(email, password, displayName) {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then(
+    function(responceData) {
+      const { user } = responceData;
+      const userUID = user.uid;
+      const userEmail = user.email;
+
+      console.log(user);
+      console.log(`newUser's uid is ${userUID}`);
+
+      const account = {
+        username: displayName,
+        email: userEmail
+      }
+      firebase.firestore().collection('users').doc(userUID).set(account);
+      // responceData.updateProfile({ displayName: displayName });
+    }
+  )
+  .catch(function(error) {
+    var errCode = error.code;
+    var errMsg = error.message;
+    console.log(`create user with error code ${errCode}, msg: ${errMsg}`);
+  })
+  ;
 }
 
 async function doChangePassword(email, oldPassword, newPassword) {
@@ -41,6 +65,34 @@ async function doSignOut() {
   await firebase.auth().signOut();
 }
 
+/********************** DB Functions ***********************/
+async function getUser(uid) {
+  const db = firebase.firestore();
+  console.log('error here?');
+  let userInfo = await db.collection('users').doc(uid).get();
+  if (!userInfo) {
+    console.log('fdsvsdfv')
+  }
+  else {
+    return userInfo.data();  
+  }
+}
+
+async function updateCity(uid, city) {
+  const db = firebase.firestore();
+  const callUpdate = await db.collection('users').doc(uid).update({
+      city: city
+  });
+  return callUpdate;
+}
+
+async function getWantItems(uid) {
+  const db = firebase.firestore();
+  const wantItems = await db.collection('users').doc(uid).collection('wantItem').get();
+  console.log(wantItems);
+  return wantItems;
+} 
+
 export {
   doCreateUserWithEmailAndPassword,
   doSocialSignIn,
@@ -48,5 +100,8 @@ export {
   doPasswordReset,
   doPasswordUpdate,
   doSignOut,
-  doChangePassword
+  doChangePassword, 
+  getUser,
+  updateCity,
+  getWantItems
 };
