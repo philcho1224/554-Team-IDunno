@@ -3,10 +3,12 @@ import SocialSignIn from './SocialSignIn';
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
 import {
-  doSignInWithEmailAndPassword,
-  doPasswordReset
+    doSignInWithEmailAndPassword,
+    doPasswordReset
 } from '../firebase/FirebaseFunc';
 import { FormControl, InputLabel, Input, FormHelperText, ButtonGroup, Button } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 
 function SignIn() {
     const { currentUser } = useContext(AuthContext);
@@ -16,9 +18,9 @@ function SignIn() {
         let { email, password } = event.target.elements;
 
         try {
-        await doSignInWithEmailAndPassword(email.value, password.value);
+            await doSignInWithEmailAndPassword(email.value, password.value);
         } catch (error) {
-        alert(error);
+            alert(error);
         }
     };
 
@@ -26,12 +28,12 @@ function SignIn() {
         event.preventDefault();
         let email = document.getElementById('email').value;
         if (email) {
-        doPasswordReset(email);
-        alert('Password reset email was sent');
+            doPasswordReset(email);
+            alert('Password reset email was sent');
         } else {
-        alert(
-            'Please enter an email address below before you click the forgot password link'
-        );
+            alert(
+                'Please enter an email address below before you click the forgot password link'
+            );
         }
     };
 
@@ -41,67 +43,33 @@ function SignIn() {
 
     return (
         <div>
-            <h1>Log in</h1>
-            <form onSubmit={handleLogin}>
+            <Container component="main" maxWidth="xs">
+                <h1>Log in</h1>
+                <form onSubmit={handleLogin}>
 
-                <FormControl>
-                    <InputLabel htmlFor="email">Email address</InputLabel>
-                    <Input id="email" aria-describedby="email-helper-text" required="true" autoFocus="true"/>
-                    <FormHelperText id="email-helper-text" required="true">We'll never share your email.</FormHelperText>
-                </FormControl>
-                <FormControl>
-                    <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input id="password" type="password" aria-describedby="password-helper-text" />
-                    <FormHelperText id="password-helper-text">Chose a good one.</FormHelperText>
-                </FormControl>
-                <Button type="submit" variant="contained" color="primary">
-                    Log in
-                </Button>
-                <Button onClick={passwordReset}>
-                    Forgot Password
-                </Button>
-            </form>
-            <SocialSignIn />
+                    <Box mt={4}>
+                        <FormControl fullWidth>
+                            <InputLabel htmlFor="email">Email address</InputLabel>
+                            <Input id="email" required="true" autoFocus="true" />
+                        </FormControl>
+                    </Box>
+                    <Box mt={4}>
+                        <FormControl fullWidth>
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <Input id="password" type="password" />
+                        </FormControl>
+                    </Box>
+                    <Button type="submit" variant="contained" color="primary">
+                        Log in
+                    </Button>
+                    <Button onClick={passwordReset}>
+                        Forgot Password
+                    </Button>
+                </form>
+                <SocialSignIn />
 
 
-
-
-
-            {/* <div className="form-group">
-                <label>
-                    Email:
-                    <input
-                    className="form-control"
-                    name="email"
-                    id="email"
-                    type="email"
-                    placeholder="Email"
-                    required
-                    />
-                </label>
-            </div>
-
-            <div className="form-group">
-                <label>
-                    Password:
-                    <input
-                    className="form-control"
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    required
-                    />
-                </label>
-            </div>
-            <button type="submit">Log in</button>
-
-            <button className="forgotPassword" onClick={passwordReset}>
-                Forgot Password
-            </button>
-        </form>
-
-        <br />
-        <SocialSignIn /> */}
+            </Container>
         </div>
     );
 }

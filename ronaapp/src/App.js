@@ -23,6 +23,18 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#00695c'
+    },
+    secondary: {
+      main: '#E33E7F'
+    }
+  }
+});
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
@@ -43,7 +55,7 @@ const Navigation = () => {
   const { currentUser } = useContext(AuthContext);
   return (
     <div>
-      { currentUser ? <NavOnAuth /> : <NavNonAuth /> }
+      {currentUser ? <NavOnAuth /> : <NavNonAuth />}
     </div>
   );
 }
@@ -86,16 +98,19 @@ const NavNonAuth = () => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Navigation />
+      <MuiThemeProvider theme={theme}>
 
-        {/* <Route exact path = '/' component = {Landing}/>
-        <Route exact path = '/marketplace' component = {Marketplace}/> */}
-        <Route exact path = '/market' component = {showItems}/>
-        <PrivateRoute path = '/account' component = {Account} />
-        <Route exact path = '/signin' component = {SignIn} />
-        <Route path = '/signup' component = {SignUp} />
-      </Router>
+        <Router>
+          <Navigation />
+
+          {/* <Route exact path = '/' component = {Landing}/>
+          <Route exact path = '/marketplace' component = {Marketplace}/> */}
+          <Route exact path='/market' component={showItems} />
+          <PrivateRoute path='/account' component={Account} />
+          <Route exact path='/signin' component={SignIn} />
+          <Route path='/signup' component={SignUp} />
+        </Router>
+      </MuiThemeProvider>
     </AuthProvider>
   );
 }
