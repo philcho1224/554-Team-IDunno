@@ -16,6 +16,28 @@ import showItems from "./components/marketplace";
 import { AuthProvider, AuthContext } from "./firebase/Auth";
 import PrivateRoute from "./components/PrivateRoute";
 import SignOutBtn from "./components/SignOut";
+import { doSignOut } from './firebase/FirebaseFunc';
+
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  navbar: {
+    background: '#2E3B55',
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  title: {
+    marginRight: theme.spacing(2),
+  },
+  active: {
+    color: '#eee',
+  }
+}));
 
 const Navigation = () => {
   const { currentUser } = useContext(AuthContext);
@@ -27,41 +49,37 @@ const Navigation = () => {
 }
 
 const NavOnAuth = () => {
+  const classes = useStyles();
   return (
-    <nav className="navigation">
-      <ul>
-        <li>
-          <NavLink exact to="/">Landing</NavLink>
-        </li>
-        <li>
-          <NavLink exact to="/market">Marketplace</NavLink>
-        </li>
-        <li>
-          <NavLink exact to="/account">Account</NavLink>
-        </li>
-        <li>
-          <SignOutBtn />
-        </li>
-      </ul>
-    </nav>
+    <AppBar position="static" className={classes.navbar}>
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          RonaApp
+        </Typography>
+        <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/">Home</Button>
+        <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/market">Marketplace</Button>
+        <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/account">Account</Button>
+        <div className={classes.grow} />
+        <Button color="inherit" onClick={doSignOut}>Sign Out</Button> 
+      </Toolbar>
+    </AppBar>
   );
 }
 
 const NavNonAuth = () => {
+  const classes = useStyles();
   return (
-    <nav className="navigation">
-      <ul>
-        <li>
-          <NavLink exact to="/">Landing</NavLink>
-        </li>
-        <li>
-          <NavLink to="/signin">Sign In</NavLink>
-        </li>
-        <li>
-          <NavLink exact to="/signup">Sign Up</NavLink>
-        </li>
-      </ul>
-    </nav>
+    <AppBar position="static" className={classes.navbar}>
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          RonaApp
+        </Typography>
+        <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/">Home</Button>
+        <div className={classes.grow} />
+        <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/signup">Sign Up</Button>
+        <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/signin">Sign In</Button>
+      </Toolbar>
+    </AppBar>
   );
 }
 
@@ -69,11 +87,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="App">
-          <header className="App-header">
-            <Navigation />
-          </header>
-        </div>
+        <Navigation />
 
         {/* <Route exact path = '/' component = {Landing}/>
         <Route exact path = '/marketplace' component = {Marketplace}/> */}
