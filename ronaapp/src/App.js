@@ -12,6 +12,7 @@ import './App.css';
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Account from "./components/Account";
+import showItems from "./components/marketplace";
 import { AuthProvider, AuthContext } from "./firebase/Auth";
 import PrivateRoute from "./components/PrivateRoute";
 import SignOutBtn from "./components/SignOut";
@@ -33,7 +34,7 @@ const NavOnAuth = () => {
           <NavLink exact to="/">Landing</NavLink>
         </li>
         <li>
-          <NavLink exact to="/maeket">Marketplace</NavLink>
+          <NavLink exact to="/market">Marketplace</NavLink>
         </li>
         <li>
           <NavLink exact to="/account">Account</NavLink>
@@ -76,6 +77,7 @@ function App() {
 
         {/* <Route exact path = '/' component = {Landing}/>
         <Route exact path = '/marketplace' component = {Marketplace}/> */}
+        <Route exact path = '/market' component = {showItems}/>
         <PrivateRoute path = '/account' component = {Account} />
         <Route exact path = '/signin' component = {SignIn} />
         <Route path = '/signup' component = {SignUp} />

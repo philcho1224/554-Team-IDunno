@@ -9,7 +9,7 @@ import {
 
 function SignIn() {
     const { currentUser } = useContext(AuthContext);
-    
+    console.log(currentUser);
     const handleLogin = async (event) => {
         event.preventDefault();
         let { email, password } = event.target.elements;

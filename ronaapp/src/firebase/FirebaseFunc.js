@@ -1,4 +1,6 @@
 import firebase from 'firebase/app';
+import 'firebase/firestore';
+// import firebaseApp from "./Firebase";
 
 async function doCreateUserWithEmailAndPassword(email, password, displayName) {
   await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -40,6 +42,25 @@ async function doPasswordUpdate(password) {
 async function doSignOut() {
   await firebase.auth().signOut();
 }
+async function getAllItems(){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const database = await marketCollection.get();
+  let itemArray = [];
+  database.forEach(doc => {
+    itemArray.push(doc.data());
+  });
+  
+  console.log("TESTING");
+  console.log(itemArray);
+  return itemArray;
+}
+async function addItem(itemObject){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const insertItem = await marketCollection.add(itemObject);
+  console.log("Added item with ID: ", insertItem.id);
+}
 
 export {
   doCreateUserWithEmailAndPassword,
@@ -48,5 +69,7 @@ export {
   doPasswordReset,
   doPasswordUpdate,
   doSignOut,
-  doChangePassword
+  doChangePassword,
+  getAllItems,
+  addItem
 };
