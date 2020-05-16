@@ -64,6 +64,25 @@ async function doPasswordUpdate(password) {
 async function doSignOut() {
   await firebase.auth().signOut();
 }
+async function getAllItems(){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const database = await marketCollection.get();
+  let itemArray = [];
+  database.forEach(doc => {
+    itemArray.push(doc.data());
+  });
+  
+  console.log("TESTING");
+  console.log(itemArray);
+  return itemArray;
+}
+async function addItem(itemObject){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const insertItem = await marketCollection.add(itemObject);
+  console.log("Added item with ID: ", insertItem.id);
+}
 
 /********************** DB Functions ***********************/
 async function getUser(uid) {

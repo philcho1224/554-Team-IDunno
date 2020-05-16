@@ -1,5 +1,7 @@
 import React from 'react';
 import { doSocialSignIn } from '../firebase/FirebaseFunc';
+import { Button } from '@material-ui/core';
+
 
 const SocialSignIn = () => {
     const socialSignOn = async (provider) => {
@@ -12,14 +14,9 @@ const SocialSignIn = () => {
 
     return (
         <div>
-        <button type="button" onClick={() => socialSignOn('google')}>
-            Sign In with Google
-        </button>
-        {/* <img
-            onClick={() => socialSignOn('facebook')}
-            alt="google signin"
-            src="/imgs/facebook_signin.png"
-        /> */}
+            <Button type="button"  color="primary" onClick={() => socialSignOn('google')}>
+                Sign In with Google
+            </Button>
         </div>
     );
 };

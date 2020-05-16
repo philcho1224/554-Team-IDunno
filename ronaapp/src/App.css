@@ -28,6 +28,46 @@
   color: #61dafb;
 }
 
+/* Start custom CSS */
+
+  /* .navigation li {
+      list-style-type: none;
+  }
+
+  a:visited{
+      color:  white;
+  }
+
+  .navigation a{
+      text-decoration: none;
+  }
+
+  .navigation a:hover{
+      text-decoration: underline;
+  }
+
+  button{
+      padding		    : 12px 20px;
+      margin		    : 8px 0;
+      border		    : none;
+      border-radius	: 50px;
+  }
+
+  button:hover {
+      background: rgb(75, 107, 167);
+      color     : white;
+  }
+
+  input{
+    padding		: 12px 20px;
+    margin		: 8px 10px;
+    border		: none;
+    border-radius	: 50px;
+    background: #cccccc;
+  } */
+
+/* End Custom CSS */
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
