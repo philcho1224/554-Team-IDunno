@@ -293,11 +293,6 @@ const ShowItems = () => {
           <Typography variant="h3">Marketplace</Typography>
         </Box>
 
-        <Fab variant="extended" color="primary" onClick={handleClickOpen}>
-          <AddIcon />
-          Create Post
-        </Fab>
-
         <InstantSearch
           // ...
           searchClient={client}
@@ -311,6 +306,13 @@ const ShowItems = () => {
           </main>
 
         </InstantSearch>
+
+        <Fab variant="extended" color="primary" onClick={handleClickOpen}>
+          <AddIcon />
+          Create Post
+        </Fab>
+
+
 
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">New Post</DialogTitle>
