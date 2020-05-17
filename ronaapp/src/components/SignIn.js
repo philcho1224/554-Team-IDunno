@@ -6,7 +6,7 @@ import {
     doSignInWithEmailAndPassword,
     doPasswordReset
 } from '../firebase/FirebaseFunc';
-import { FormControl, InputLabel, Input, FormHelperText, ButtonGroup, Button } from '@material-ui/core';
+import { FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -68,12 +68,12 @@ function SignIn() {
                     <Box mt={1}>
                         <Grid container fullWidth>
                             <Grid item xs>
-                                <Button onClick={passwordReset}>
-                                    Forgot Password
-                            </Button>
+                                <SocialSignIn />
                             </Grid>
                             <Grid item>
-                                <SocialSignIn />
+                                <Button onClick={passwordReset}>
+                                    Forgot Password
+                                </Button>
                             </Grid>
 
                         </Grid>

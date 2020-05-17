@@ -4,6 +4,8 @@ import PwdReset from './PwdReset';
 import '../App.css';
 import { AuthContext } from '../firebase/Auth';
 import { getUser } from '../firebase/FirebaseFunc';
+import Container from '@material-ui/core/Container';
+import { Typography, Box } from '@material-ui/core';
 
 
 
@@ -36,30 +38,39 @@ function Account() {
         console.log(userInfo.email);
         return (
             <div>
-            <h2>Profile Page</h2>
-            <p>Profile Pic </p>
-            <p>Username: </p>  
-                {userInfo.username}
-            <p>Email: </p>
-                {userInfo.email}
-            <br />
-            <p>Post: </p>
-            <PwdReset />
-            <SignOutBtn />
+                <Container component="main" maxWidth="lg" >
+                    <Box mt={3}>
+                        <Typography variant="h3">Profile Page</Typography>
+                    </Box>
+                    <p>Profile Pic </p>
+                    <p>Username: </p>
+                    {userInfo.username}
+                    <p>Email: </p>
+                    {userInfo.email}
+                    <br />
+                    <p>Post: </p>
+                    <PwdReset />
+                    <SignOutBtn />
+
+                </Container>
             </div>
         );
     } else {
         return (
             <div>
-            <h2>Profile Page</h2>
-            <p>User Data didn't detected </p>
-            <p>Post: </p>
-            <PwdReset />
-            <SignOutBtn />
+                <Container component="main" maxWidth="lg" >
+                    <Box mt={3}>
+                        <Typography variant="h3">Profile Page</Typography>
+                    </Box>
+                    <p>User Data didn't detected </p>
+                    <p>Post: </p>
+                    <PwdReset />
+                    <SignOutBtn />
+                </Container>
             </div>
         );
     }
-    
+
 }
 
 export default Account;

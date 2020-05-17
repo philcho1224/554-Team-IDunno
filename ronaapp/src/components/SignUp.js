@@ -3,8 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { doCreateUserWithEmailAndPassword } from '../firebase/FirebaseFunc';
 import { AuthContext } from '../firebase/Auth';
 import SocialSignIn from './SocialSignIn';
-import { FormControl, InputLabel, Input, FormHelperText, ButtonGroup, Button } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { FormControl, InputLabel, Input, FormHelperText, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
@@ -16,7 +15,7 @@ function SignUp() {
     const handleSignUp = async (e) => {
         e.preventDefault();
         const { displayName, email, passwordOne, passwordTwo } = e.target.elements;
-        
+
         if (passwordOne.value !== passwordTwo.value) {
             setPwMatch('Passwords do not match');
             return false;
@@ -66,7 +65,7 @@ function SignUp() {
                             <Input id="passwordOne-input" name="passwordOne" type="password" required="true" />
                         </FormControl>
 
-                        <FormControl style={{float: 'right'}}>
+                        <FormControl style={{ float: 'right' }}>
                             <InputLabel htmlFor="passwordTwo-input">Confirm Password</InputLabel>
                             <Input id="passwordTwo-input" name="passwordTwo" type="password" required="true" />
                             {pwMatch && <FormHelperText error className="error" id="password-helper-text">{pwMatch}</FormHelperText>}
@@ -78,11 +77,13 @@ function SignUp() {
                         <Button type="submit" variant="contained" color="primary" fullWidth>
                             Sign Up
                         </Button>
+                        <Box mt={1}>
+                            <SocialSignIn />
+                        </Box>
                     </Box>
 
 
                 </form>
-                <SocialSignIn />
             </Container>
 
         </div>
