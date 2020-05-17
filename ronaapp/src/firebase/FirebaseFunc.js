@@ -146,5 +146,7 @@ export {
   updateCity,
   getWantItems,
   getUserItems,
-  deleteItem
+  deleteItem,
+  addItem,
+  getAllItems
 };
