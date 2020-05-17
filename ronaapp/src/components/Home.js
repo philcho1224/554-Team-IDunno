@@ -131,16 +131,13 @@ class Home extends React.Component {
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Typography variant="h3">COVID-19 Stats</Typography>
-            <Typography variant="subtitle1">
+            <Typography variant="h2">COVID-19 Stats</Typography>
+            <Typography variant="body1">
               All data retrieved from <a href="https://covid19-api.com">covid19-api.com</a>
             </Typography>
           </Grid>
           <Grid item xs={12} lg={4} xl={3}>
             <Paper className={classes.paper} elevation={2}>
-              <Typography variant="h5">
-
-              </Typography>
               <Autocomplete
                 id="country-select"
                 options={this.state.countries}
@@ -169,7 +166,7 @@ class Home extends React.Component {
                 )}
                 onChange={(_,option) => {if (option) this.changeCountry(option.name)}}
               />
-              <Typography variant="h5">Latest data for <b>{this.state.selectedCountry}</b></Typography>
+              <Typography variant="body1" style={{fontSize: 24}}>Latest data for <b>{this.state.selectedCountry}</b></Typography>
               {latest ?
                 <Typography variant="body2">Last change: {new Date(latest.lastChange).toLocaleString()}</Typography>
                 : <Typography variant="body2">Loading...</Typography>
