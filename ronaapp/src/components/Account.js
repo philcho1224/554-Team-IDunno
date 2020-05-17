@@ -87,7 +87,7 @@ function Account() {
             <div>
                 <Container component="main" maxWidth="lg" >
                     <Box mt={3}>
-                        <Typography variant="h3">Profile Page</Typography>
+                        <Typography variant="h2">Profile Page</Typography>
                     </Box>
                     <p>Profile Pic </p>
                     <p>Username: </p>
@@ -108,7 +108,7 @@ function Account() {
             <div>
                 <Container component="main" maxWidth="lg" >
                     <Box mt={3}>
-                        <Typography variant="h3">Profile Page</Typography>
+                        <Typography variant="h2">Profile Page</Typography>
                     </Box>
                     <p>User Data didn't detected </p>
                     <p>Post: </p>

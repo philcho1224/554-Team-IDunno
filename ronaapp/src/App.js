@@ -29,7 +29,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#eee'
+      default: '#eeefff'
     },
     primary: {
       main: '#00695c'
@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginRight: theme.spacing(2),
+    fontSize: 24
   },
   active: {
     color: '#eee',
@@ -69,7 +70,7 @@ const NavOnAuth = () => {
   return (
     <AppBar position="static" className={classes.navbar}>
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h1" className={classes.title}>
           RonaApp
         </Typography>
         <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/">Home</Button>
@@ -87,7 +88,7 @@ const NavNonAuth = () => {
   return (
     <AppBar position="static" className={classes.navbar}>
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h1" className={classes.title}>
           RonaApp
         </Typography>
         <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/">Home</Button>
