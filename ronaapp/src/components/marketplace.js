@@ -274,7 +274,7 @@ const ShowItems = () => {
                       <FormHelperText id="tradeitem1-helper-text">Ex. Toilet Paper</FormHelperText>
                     </FormControl>
                   </Grid>
-                  <Grid item xs >
+                  <Grid item xs  class="Middle_item" >
                     <FormControl fullWidth>
                       <InputLabel htmlFor="tradeitem2">Trade Item 2</InputLabel>
                       <Input id="tradeitem2" name="tradeitem2" type="text" required />

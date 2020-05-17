@@ -38,6 +38,10 @@
     left: auto;
     position: fixed !important;
 }
+
+.Middle_item {
+    margin: 0 5px;
+}
   /* .navigation li {
       list-style-type: none;
   }
