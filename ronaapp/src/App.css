@@ -43,21 +43,18 @@
     margin: 0 5px;
 }
 
-ul {
+.ais-Hits-list{
     margin      : 0 auto;
     text-align  : center;
     list-style  : none;
     padding     : 0;
 }
 
-li {
+.ais-Hits-item {
     display       : inline-block;
     vertical-align: top;
-}
-
-li.ais-Hits-item {
-    width : 400px;
-    margin: 25px 0;
+    width         : 400px;
+    margin        : 25px 0;
 }
 
 .ais-SearchBox-input{
