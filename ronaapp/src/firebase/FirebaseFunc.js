@@ -85,12 +85,11 @@ async function addItem(itemObject){
 /********************** DB Functions ***********************/
 async function getUser(uid) {
   const db = firebase.firestore();
-  console.log('error here?');
+  // console.log('error here?');
   let userInfo = await db.collection('users').doc(uid).get();
   if (!userInfo) {
-    console.log('fdsvsdfv')
-  }
-  else {
+    console.log('fail to find userInfo')
+  } else {
     return userInfo.data();
   }
 }
@@ -103,12 +102,6 @@ async function updateCity(uid, city) {
   return callUpdate;
 }
 
-async function getWantItems(uid) {
-  const db = firebase.firestore();
-  const wantItems = await db.collection('users').doc(uid).collection('wantItem').get();
-  console.log(wantItems);
-  return wantItems;
-}
 async function getUserItems(userEmail){
   const db = firebase.firestore();
   let marketCollection = db.collection("marketItems");
@@ -120,6 +113,7 @@ async function getUserItems(userEmail){
   console.log("UserItems" , itemArray);
   return itemArray;
 }
+
 async function deleteItem(userEmail, itemId){
   console.log("ItemID,", itemId)
   const db = firebase.firestore();
@@ -165,7 +159,6 @@ export {
   doChangePassword,
   getUser,
   updateCity,
-  getWantItems,
   getUserItems,
   deleteItem,
   addItem,

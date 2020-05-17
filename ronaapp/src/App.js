@@ -18,7 +18,6 @@ import { AuthProvider, AuthContext } from "./firebase/Auth";
 import PrivateRoute from "./components/PrivateRoute";
 import SignOutBtn from "./components/SignOut";
 import { doSignOut } from './firebase/FirebaseFunc';
-
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
