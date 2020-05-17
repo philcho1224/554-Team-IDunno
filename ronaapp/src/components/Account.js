@@ -4,7 +4,8 @@ import PwdReset from './PwdReset';
 import '../App.css';
 import { AuthContext } from '../firebase/Auth';
 import { getUser } from '../firebase/FirebaseFunc';
-import Typography from "@material-ui/core/Typography";
+import Container from '@material-ui/core/Container';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Grid, Box, FormControl, FormHelperText } from '@material-ui/core';
 
 
 
@@ -37,27 +38,35 @@ function Account() {
         console.log(userInfo.email);
         return (
             <div>
-            <h2>Profile Page</h2>
-            <p>Profile Pic </p>
-            <p>Username: </p>
-                {userInfo.username}
-            <p>Email: </p>
-                {userInfo.email}
-            <br />
-            <p>Post: </p>
-            <PwdReset />
-            <SignOutBtn />
+                <Container component="main" maxWidth="lg" >
+                    <Box mt={3}>
+                        <Typography variant="h3">Profile Page</Typography>
+                    </Box>
+                    <p>Profile Pic </p>
+                    <p>Username: </p>
+                    {userInfo.username}
+                    <p>Email: </p>
+                    {userInfo.email}
+                    <br />
+                    <p>Post: </p>
+                    <PwdReset />
+                    <SignOutBtn />
+
+                </Container>
             </div>
         );
     } else {
         return (
             <div>
-            <Typography variant="h3">Profile Page</Typography>
-            {/* <h2>Profile Page</h2> */}
-            <p>User Data didn't detected </p>
-            <p>Post: </p>
-            <PwdReset />
-            <SignOutBtn />
+                <Container component="main" maxWidth="lg" >
+                    <Box mt={3}>
+                        <Typography variant="h3">Profile Page</Typography>
+                    </Box>
+                    <p>User Data didn't detected </p>
+                    <p>Post: </p>
+                    <PwdReset />
+                    <SignOutBtn />
+                </Container>
             </div>
         );
     }

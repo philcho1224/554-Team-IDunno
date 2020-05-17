@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../firebase/Auth';
 import { doChangePassword } from '../firebase/FirebaseFunc';
 import '../App.css';
+import { FormControl } from '@material-ui/core';
+import { InputLabel, Input, FormHelperText, ButtonGroup, Button, Box } from '@material-ui/core';
 
 function PwdReset() {
     const { currentUser } = useContext(AuthContext);
@@ -14,7 +16,7 @@ function PwdReset() {
             currentPassword,
             newPasswordOne,
             newPasswordTwo
-            } = event.target.elements;
+        } = event.target.elements;
 
         if (newPasswordOne.value !== newPasswordTwo.value) {
             setPwMatch('New Passwords do not match, please try again');
@@ -32,55 +34,35 @@ function PwdReset() {
             alert(error);
         }
     };
-    
+
     if (currentUser.providerData[0].providerId === 'password') {
         return (
             <div>
-                {pwMatch && <h4 className="error">{pwMatch}</h4>}
                 <h2>Change Password</h2>
                 <form onSubmit={submitForm}>
-                <div className="form-group">
-                    <label>
-                    Current Password:
-                    <input
-                        className="form-control"
-                        name="currentPassword"
-                        id="currentPassword"
-                        type="password"
-                        placeholder="Current Password"
-                        required
-                    />
-                    </label>
-                </div>
+                    <FormControl >
+                        <InputLabel htmlFor="currentPassword">Current Password</InputLabel>
+                        <Input id="currentPassword" name="currentPassword" type="password" required="true" />
+                    </FormControl>
 
-                <div className="form-group">
-                    <label>
-                    New Password:
-                    <input
-                        className="form-control"
-                        name="newPasswordOne"
-                        id="newPasswordOne"
-                        type="password"
-                        placeholder="Password"
-                        required
-                    />
-                    </label>
-                </div>
-                <div className="form-group">
-                    <label>
-                    Confirm New Password:
-                    <input
-                        className="form-control"
-                        name="newPasswordTwo"
-                        id="newPasswordTwo"
-                        type="password"
-                        placeholder="Confirm Password"
-                        required
-                    />
-                    </label>
-                </div>
+                    <Box mt={2}>
+                        <FormControl >
+                            <InputLabel htmlFor="newPasswordOne">New Password</InputLabel>
+                            <Input id="newPasswordOne" name="newPasswordOne" type="password" required="true" />
+                        </FormControl>
+                    </Box>
 
-                <button type="submit">Change Password</button>
+                    <Box mt={2}>
+                        <FormControl >
+                            <InputLabel htmlFor="newPasswordTwo">Confirm New Password</InputLabel>
+                            <Input id="newPasswordTwo" name="newPasswordTwo" type="password" required="true" />
+                            {pwMatch && <FormHelperText error className="error" id="password-helper-text">{pwMatch}</FormHelperText>}
+                        </FormControl>
+                    </Box>
+
+                    <Box mt={2}>
+                        <Button type="submit" variant="contained" color="primary">Change Password</Button>
+                    </Box>
                 </form>
                 <br />
             </div>
@@ -89,8 +71,8 @@ function PwdReset() {
         return (
             <div>
                 <h2>
-                You are signed in using a Social Media Provider, You cannot change
-                your password
+                    You are signed in using a Social Media Provider, You cannot change
+                    your password
                 </h2>
             </div>
         );
