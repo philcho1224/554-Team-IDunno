@@ -3,18 +3,15 @@ import SignOutBtn from './SignOut';
 import PwdReset from './PwdReset';
 import '../App.css';
 import { AuthContext } from '../firebase/Auth';
-import { getUser } from '../firebase/FirebaseFunc';
+import { getUser, getUserItems } from '../firebase/FirebaseFunc';
 import Container from '@material-ui/core/Container';
+import { Button, Card, CardContent, Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import { Typography, Box } from '@material-ui/core';
-
-
 
 function Account() {
     const { currentUser } = useContext(AuthContext);
     const [userInfo, setUesrInfo] = useState(undefined);
-
-    // const uid = currentUser.uid;
-    // console.log(`email is ${uid}`);
+    const [trades, setTrades] = useState(undefined);
 
     useEffect(() => {
         async function getUserInfo(uid) {
@@ -27,10 +24,61 @@ function Account() {
                 console.log(`call getUser catch err ${error}`);
             }
         }
+
+        async function getItems(email) {
+            let trades;
+            try {
+                let info = await getUserItems(email);
+                trades = info[0].tradeitems
+                console.log(trades);
+                setTrades(trades);
+            } catch (error) {
+                console.log(`call getUser catch err ${error}`);
+            }
+        }
+
         getUserInfo(currentUser.uid);
-        console.log(userInfo);
-        console.log(`userInfooooooooo is ${userInfo}`);
+        getItems(currentUser.email);
+        // console.log(userInfo);
+        // console.log(trades);
+        // console.log(`userInfooooooooo is ${userInfo}`);
+        // console.log(`traaaaaaades is ${trades}`);
     }, []);
+
+    let cards = null;
+    if (trades) {
+        cards = trades && trades.map((value, index) => {
+            return (
+                // <Card>
+                //     <CardContent>
+                //         <Typography>
+                //             {value}
+                //         </Typography>
+                //     </CardContent>
+                // </Card>
+
+                <List>
+                    <ListItem>
+                        <ListItemText>
+                            {value}
+                        </ListItemText>
+                    </ListItem>
+                </List>
+            )
+        })
+    } else {
+        cards = () => {
+            return (
+                <Card>
+                    <CardContent>
+                        <Typography>
+                            You have not added any trade items.
+                        </Typography>
+                    </CardContent>
+                </Card> 
+            )
+        }
+    }
 
     if (userInfo) {
         console.log(`userInfo is ${userInfo}`);
@@ -48,7 +96,8 @@ function Account() {
                     <p>Email: </p>
                     {userInfo.email}
                     <br />
-                    <p>Post: </p>
+            <p> My Trades: </p>
+                {cards}
                     <PwdReset />
                     <SignOutBtn />
 
