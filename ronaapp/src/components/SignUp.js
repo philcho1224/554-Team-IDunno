@@ -66,7 +66,7 @@ function SignUp() {
                             <Input id="passwordOne-input" name="passwordOne" type="password" required="true" />
                         </FormControl>
 
-                        <FormControl >
+                        <FormControl style={{float: 'right'}}>
                             <InputLabel htmlFor="passwordTwo-input">Confirm Password</InputLabel>
                             <Input id="passwordTwo-input" name="passwordTwo" type="password" required="true" />
                             {pwMatch && <FormHelperText error className="error" id="password-helper-text">{pwMatch}</FormHelperText>}
