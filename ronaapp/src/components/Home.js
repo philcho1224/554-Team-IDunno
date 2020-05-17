@@ -8,13 +8,11 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 
 import {
-  ArgumentAxis,
   ValueAxis,
   Chart,
   Legend,
   Title,
-  AreaSeries,
-  BarSeries
+  AreaSeries
 } from "@devexpress/dx-react-chart-material-ui";
 import { ValueScale, Stack } from "@devexpress/dx-react-chart";
 
@@ -45,7 +43,7 @@ class Home extends React.Component {
 
     this.state = {
       latest: {},
-      daily: {},
+      daily: [],
       countries: [],
       selectedCountry: "All countries"
     }
@@ -54,6 +52,7 @@ class Home extends React.Component {
   componentDidMount() {
     this.fetchData("All countries");
     this.fetchCountries();
+    this.fetchChartData();
   }
 
   fetchCountries() {
@@ -72,7 +71,7 @@ class Home extends React.Component {
       });
   }
 
-  async fetchData(country) {
+  fetchData(country) {
     if (country === "All countries") {
       fetch("https://covid19-api.com/totals?format=json")
         .then((res) => res.json())
@@ -83,34 +82,6 @@ class Home extends React.Component {
         .catch((err) => {
           console.error(err);
         });
-
-      var today = new Date(new Date().setDate(new Date().getDate() - 1));
-      var date = new Date(new Date().setDate(today.getDate() - 30));
-      
-      if (!(country in this.state.daily)) {
-        var daily = [];
-        while (date < today) {
-          let dateString = date.toISOString().split('T')[0];
-          await fetch(`https://covid19-api.com/report/totals?date=${dateString}&date-format=YYYY-MM-DD&format=json`)
-            .then((res) =>res.json())
-            .then((json) => {
-              let data = json[0];
-              daily.push(data);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-          date.setDate(date.getDate() + 1);
-        }
-        daily.push({
-          date: "today",
-          recovered: this.state.latest[country].recovered,
-          deaths: this.state.latest[country].deaths,
-          active: this.state.latest[country].confirmed - this.state.latest[country].recovered - this.state.latest[country].deaths
-        });
-        this.setState({ daily: { [country] : daily }});
-        console.log(this.state.daily)
-      }
     }
     else {
       fetch(`https://covid19-api.com/country?name=${country}&format=json`)
@@ -125,16 +96,37 @@ class Home extends React.Component {
     }
   }
 
+  async fetchChartData() {
+    var today = new Date(new Date().setDate(new Date().getDate() - 1));
+    var date = new Date(new Date().setDate(today.getDate() - 30));
+      
+
+    var daily = [];
+    while (date < today) {
+      let dateString = date.toISOString().split('T')[0];
+      await fetch(`https://covid19-api.com/report/totals?date=${dateString}&date-format=YYYY-MM-DD&format=json`)
+        .then((res) =>res.json())
+        .then((json) => {
+          let data = json[0];
+          daily.push(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      date.setDate(date.getDate() + 1);
+    }
+    this.setState({ daily: daily });
+  }
+
   changeCountry(name) {
     this.setState({ selectedCountry: name });
     this.fetchData(name);
-    console.log(this.state.selectedCountry)
   }
 
   render() {
     const { classes } = this.props;
     const latest = this.state.latest[this.state.selectedCountry];
-    const daily = this.state.daily[this.state.selectedCountry];
+    const daily = this.state.daily;
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
