@@ -99,7 +99,7 @@ class Home extends React.Component {
   async fetchChartData() {
     var today = new Date(new Date().setDate(new Date().getDate() - 1));
     var date = new Date(new Date().setDate(today.getDate() - 30));
-      
+
 
     var daily = [];
     while (date < today) {
@@ -170,7 +170,7 @@ class Home extends React.Component {
                 onChange={(_,option) => {if (option) this.changeCountry(option.name)}}
               />
               <Typography variant="h5">Latest data for <b>{this.state.selectedCountry}</b></Typography>
-              {latest ? 
+              {latest ?
                 <Typography variant="body2">Last change: {new Date(latest.lastChange).toLocaleString()}</Typography>
                 : <Typography variant="body2">Loading...</Typography>
               }

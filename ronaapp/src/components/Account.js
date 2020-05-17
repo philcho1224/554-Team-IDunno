@@ -4,6 +4,7 @@ import PwdReset from './PwdReset';
 import '../App.css';
 import { AuthContext } from '../firebase/Auth';
 import { getUser } from '../firebase/FirebaseFunc';
+import Typography from "@material-ui/core/Typography";
 
 
 
@@ -38,7 +39,7 @@ function Account() {
             <div>
             <h2>Profile Page</h2>
             <p>Profile Pic </p>
-            <p>Username: </p>  
+            <p>Username: </p>
                 {userInfo.username}
             <p>Email: </p>
                 {userInfo.email}
@@ -51,7 +52,8 @@ function Account() {
     } else {
         return (
             <div>
-            <h2>Profile Page</h2>
+            <Typography variant="h3">Profile Page</Typography>
+            {/* <h2>Profile Page</h2> */}
             <p>User Data didn't detected </p>
             <p>Post: </p>
             <PwdReset />
@@ -59,7 +61,7 @@ function Account() {
             </div>
         );
     }
-    
+
 }
 
 export default Account;
