@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "thinking-bonsai-277422",
+  "private_key_id": "1ab0c3d1c4c2a495364098d5d2f8f379c5a5f078",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCR1wxZE2hvHXiB\nimGovcE1UWUMAO51fObpggSSyCglsGl9oKlVJLJyIwGDb35kJGx1dpRATA/TGI0d\n8trNw+mtC4plotJjrfdFD7AaP6qHDR4XYAnRrGo7lwENW8VG9RsMezVmUj4fSyrm\n8NPOG7T1umf1mSKBC1xWDl/Toant/Sho3upITqGLfpy0C7RafgCruln00baRH9ce\n9inEPbAYovq+jlQ7JlV51QH3+SpQUkpYSLZtF6LuImqk015Lp2YT6H/KLGSuOP04\nLpTg+HhZ/jys1sG1ngclrdNBJ8fyqt2qNkJgirx4NaUtPSotwPwXz9+rEQKiShPQ\nW3CXkoNhAgMBAAECggEANUnRCrkzNyqbDiZMsdYIA13m4KB0gTxuuVLXLfTx6neP\nzCYIyYIbq+XLl0WFdrzyXmdCG05Pl/AIHDHRLk9QEnk9jA6W9nIqADOPwr+RpUAv\nRxZB8DmiJXzzFvj52AgWZpScefNCHLggCHtlwRFRqVn/w3c9as6GYjFlZVRUXY9O\nX70Dp/BeOukxGI6JKkBoPxE0WPnNG3n7gIm+19tQBXwWorYMJ5Op7s2cMxunMXve\nbXl5tzw4th+2loyhvxkev2t/ZwXwS3gr/LKngTwAshowmS0bw7Qm0LsukcST9qiM\nYgJRbgeyYmTQounR0y2YfovvWHq1udA0qe8VQCEREwKBgQDCl89hxScQqBTExoOb\ngDQ/vJjAXvRQyE5nhxW43ABLxjLSTVraMWz/aharf7HFsEqHYM7eddfSGi+ee8WB\nsnEtdFiRe8gIC7rbAgxFkYFMdz6eNam9vCQIeYuAHKpNMvD4+25KQHtV99V570x4\nkeTiZHrjrt4pCs6kzszthfbjowKBgQC/3LsFSXaI7SBpDdY/Yi35cx87n+xJ37oV\nLvqaGhfhVsAkm0AM2Aq08KT2vqqsKLwBG11v2qnfEx0xmYVry5TdpY/0RBUvQ+dO\npd0/PQpVDGJF1QEOjKdNClP9V1UkStdqJyooIe38+CDkO7TUbYRuXiPg8Glpfa0Q\nguM/jPkNKwKBgEEBP7j0iHFLBO0bN7nJoSqtkQWqcslNsMtq1/nSHJMzmaShTLlZ\nC4VjZkFSPgvBMZR55YFxMnCwaLnztO33s1Ew7alkBVWSvZAN5hWTXvMxXoyxdou4\nfv0JxW09pjJ10wQJ0jUhx1HXocvDAfPBIQnz8Q2ATBy/zHpHzzOFrg0rAoGAHkVR\nLJBep1PiXTDVsMJoxoanUtz0huNJlLYIy+95/Q+W2S+1d1FOvyWIoXWLsAXtQ69x\nmohBbPSzEnRKXKuOHTpV8BAd14s7H2mD8spKqwh9KM9mj0kZzEno3nu87zDvs8vi\nFtrjlZoAdoIFEc8FqfQobQEBYKd3erdr60butGkCgYAlV3XVQsHvYLDN2rCvFAQq\nx/eJZ+XoOQw65SpNZxWxrLZyYSeu8sx4vPhLNPbt3TVaOQEpyluOiCD5RGWYJ90k\nKBqAkDFnX8A9T0fUd+ukUHgg6Uo1cWQH/xSPI8wZywl6eIzUInAk+7+UVku1gCvw\n/auleSUBpG9JIOCFi9tZFQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "philip-cho@thinking-bonsai-277422.iam.gserviceaccount.com",
+  "client_id": "103986198826246238333",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/philip-cho%40thinking-bonsai-277422.iam.gserviceaccount.com"
+}

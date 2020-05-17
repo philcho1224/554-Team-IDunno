@@ -25,12 +25,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const customTheme = createMuiTheme({
+const theme = createMuiTheme({
   palette: {
     background: {
       default: '#eee'
+    },
+    primary: {
+      main: '#00695c'
+    },
+    secondary: {
+      main: '#E33E7F'
     }
   }
 });
@@ -54,7 +60,7 @@ const Navigation = () => {
   const { currentUser } = useContext(AuthContext);
   return (
     <div>
-      { currentUser ? <NavOnAuth /> : <NavNonAuth /> }
+      {currentUser ? <NavOnAuth /> : <NavNonAuth />}
     </div>
   );
 }
@@ -71,7 +77,7 @@ const NavOnAuth = () => {
         <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/market">Marketplace</Button>
         <Button color="inherit" activeClassName={classes.active} component={NavLink} exact to="/account">Account</Button>
         <div className={classes.grow} />
-        <Button color="inherit" onClick={doSignOut}>Sign Out</Button> 
+        <Button color="inherit" onClick={doSignOut}>Sign Out</Button>
       </Toolbar>
     </AppBar>
   );
@@ -97,7 +103,7 @@ const NavNonAuth = () => {
 function App() {
   return (
     <AuthProvider>
-      <MuiThemeProvider theme={customTheme}>
+      <MuiThemeProvider theme={theme}>
       <CssBaseline />
         <Router>
           <Navigation />
@@ -110,7 +116,7 @@ function App() {
         </Router>
       </MuiThemeProvider>
     </AuthProvider>
-  ); 
+  );
 }
 
 export default App;

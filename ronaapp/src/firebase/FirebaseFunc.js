@@ -1,10 +1,32 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-// import firebaseApp from "./Firebase";
 
-async function doCreateUserWithEmailAndPassword(email, password, displayName) {
-  await firebase.auth().createUserWithEmailAndPassword(email, password);
-  firebase.auth().currentUser.updateProfile({ displayName: displayName });
+/********************** Auth Functions ***********************/
+function doCreateUserWithEmailAndPassword(email, password, displayName) {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then(
+    function(responceData) {
+      const { user } = responceData;
+      const userUID = user.uid;
+      const userEmail = user.email;
+
+      console.log(user);
+      console.log(`newUser's uid is ${userUID}`);
+
+      const account = {
+        username: displayName,
+        email: userEmail
+      }
+      firebase.firestore().collection('users').doc(userUID).set(account);
+      // responceData.updateProfile({ displayName: displayName });
+    }
+  )
+  .catch(function(error) {
+    var errCode = error.code;
+    var errMsg = error.message;
+    console.log(`create user with error code ${errCode}, msg: ${errMsg}`);
+  })
+  ;
 }
 
 async function doChangePassword(email, oldPassword, newPassword) {
@@ -51,8 +73,6 @@ async function getAllItems(){
     itemArray.push(doc.data());
   });
   
-  console.log("TESTING");
-  console.log(itemArray);
   return itemArray;
 }
 async function addItem(itemObject){
@@ -62,6 +82,58 @@ async function addItem(itemObject){
   console.log("Added item with ID: ", insertItem.id);
 }
 
+/********************** DB Functions ***********************/
+async function getUser(uid) {
+  const db = firebase.firestore();
+  console.log('error here?');
+  let userInfo = await db.collection('users').doc(uid).get();
+  if (!userInfo) {
+    console.log('fdsvsdfv')
+  }
+  else {
+    return userInfo.data();  
+  }
+}
+
+async function updateCity(uid, city) {
+  const db = firebase.firestore();
+  const callUpdate = await db.collection('users').doc(uid).update({
+      city: city
+  });
+  return callUpdate;
+}
+
+async function getWantItems(uid) {
+  const db = firebase.firestore();
+  const wantItems = await db.collection('users').doc(uid).collection('wantItem').get();
+  console.log(wantItems);
+  return wantItems;
+} 
+async function getUserItems(userEmail){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const database = await marketCollection.where('email', '==', userEmail).get();
+  let itemArray = [];
+  database.forEach(doc => {
+    itemArray.push(doc.data());
+  });
+  console.log("UserItems" , itemArray);
+  return itemArray;
+}
+async function deleteItem(userEmail, itemId){
+  console.log("ItemID,", itemId)
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const getItem  = await marketCollection.doc(itemId).get();
+  console.log(getItem.data());
+  if(getItem.data().email !== userEmail){
+    console.log("Cant delete item that is not yours")
+  }
+  else{
+    const deleteItem = await marketCollection.doc(itemId).delete();
+  }
+}
+
 export {
   doCreateUserWithEmailAndPassword,
   doSocialSignIn,
@@ -69,7 +141,10 @@ export {
   doPasswordReset,
   doPasswordUpdate,
   doSignOut,
-  doChangePassword,
-  getAllItems,
-  addItem
+  doChangePassword, 
+  getUser,
+  updateCity,
+  getWantItems,
+  getUserItems,
+  deleteItem
 };
