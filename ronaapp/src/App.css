@@ -31,16 +31,51 @@
 /* Start custom CSS */
 
 .MuiFab-root {
-    margin: 0;
-    top: auto;
-    right: 56px;
-    bottom: 42px;
-    left: auto;
+    margin  : 0;
+    top     : auto;
+    right   : 36px;
+    bottom  : 36px;
+    left    : auto;
     position: fixed !important;
 }
 
 .Middle_item {
     margin: 0 5px;
+}
+
+ul {
+    margin      : 0 auto;
+    text-align  : center;
+    list-style  : none;
+    padding     : 0;
+}
+
+li {
+    display       : inline-block;
+    vertical-align: top;
+}
+
+li.ais-Hits-item {
+    width : 400px;
+    margin: 25px 0;
+}
+
+.ais-SearchBox-input{
+    width         : 292px;
+    padding       : 12px 20px;
+    margin        : 8px 0;
+    border        : none;
+    border-radius : 8px;
+    margin-left   : 28px;
+}
+
+.ais-SearchBox-submit, .ais-SearchBox-reset {
+    border          : none;
+    background-color: white;
+    border-radius   : 8px;
+    height          : 39px;
+    width           : 39px;
+    margin-left     : 8px;
 }
   /* .navigation li {
       list-style-type: none;
