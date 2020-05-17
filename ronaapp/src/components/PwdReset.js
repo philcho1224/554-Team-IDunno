@@ -3,7 +3,7 @@ import { AuthContext } from '../firebase/Auth';
 import { doChangePassword } from '../firebase/FirebaseFunc';
 import '../App.css';
 import { FormControl } from '@material-ui/core';
-import { InputLabel, Input, FormHelperText, ButtonGroup, Button, Box } from '@material-ui/core';
+import { InputLabel, Input, FormHelperText, Button, Box } from '@material-ui/core';
 
 function PwdReset() {
     const { currentUser } = useContext(AuthContext);

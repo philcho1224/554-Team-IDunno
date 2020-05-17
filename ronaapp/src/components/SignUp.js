@@ -3,8 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { doCreateUserWithEmailAndPassword } from '../firebase/FirebaseFunc';
 import { AuthContext } from '../firebase/Auth';
 import SocialSignIn from './SocialSignIn';
-import { FormControl, InputLabel, Input, FormHelperText, ButtonGroup, Button } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { FormControl, InputLabel, Input, FormHelperText, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 

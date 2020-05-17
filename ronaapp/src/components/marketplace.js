@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { getAllItems, addItem, getUser, deleteItem, getUserItems } from '../firebase/FirebaseFunc';
 import { AuthContext } from '../firebase/Auth';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Grid, Box, FormControl, FormHelperText } from '@material-ui/core';
-import { Button, InputLabel, Input, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Button, InputLabel, Input, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 
 import * as google from 'google-parser'

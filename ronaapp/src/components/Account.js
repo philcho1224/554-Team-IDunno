@@ -5,7 +5,7 @@ import '../App.css';
 import { AuthContext } from '../firebase/Auth';
 import { getUser } from '../firebase/FirebaseFunc';
 import Container from '@material-ui/core/Container';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Grid, Box, FormControl, FormHelperText } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 
 
 
