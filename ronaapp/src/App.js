@@ -9,6 +9,7 @@ import {
   NavLink
 } from "react-router-dom";
 import './App.css';
+import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Account from "./components/Account";
@@ -23,6 +24,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+const customTheme = createMuiTheme({
+  palette: {
+    background: {
+      default: '#eee'
+    }
+  }
+});
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
@@ -86,16 +97,18 @@ const NavNonAuth = () => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Navigation />
+      <MuiThemeProvider theme={customTheme}>
+      <CssBaseline />
+        <Router>
+          <Navigation />
 
-        {/* <Route exact path = '/' component = {Landing}/>
-        <Route exact path = '/marketplace' component = {Marketplace}/> */}
-        <Route exact path = '/market' component = {showItems}/>
-        <PrivateRoute path = '/account' component = {Account} />
-        <Route exact path = '/signin' component = {SignIn} />
-        <Route path = '/signup' component = {SignUp} />
-      </Router>
+          <Route exact path = '/' component = {Home}/>
+          <Route exact path = '/market' component = {showItems}/>
+          <PrivateRoute path = '/account' component = {Account} />
+          <Route exact path = '/signin' component = {SignIn} />
+          <Route path = '/signup' component = {SignUp} />
+        </Router>
+      </MuiThemeProvider>
     </AuthProvider>
   ); 
 }
