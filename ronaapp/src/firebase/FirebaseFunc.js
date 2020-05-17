@@ -134,6 +134,27 @@ async function deleteItem(userEmail, itemId){
   }
 }
 
+async function editUserProfile(userID, editObject){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("users");
+  let setWithOptions = await marketCollection.doc(userID).set(editObject, {merge: true});
+
+}
+
+async function editItem(userEmail, itemID, editObject){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const getItem  = await marketCollection.doc(itemID).get();
+  console.log(getItem.data());
+  if(getItem.data().email !== userEmail){
+    console.log("Cant delete item that is not yours")
+  }
+  else{
+    let setWithOptions = await marketCollection.doc(itemID).set(editObject, {merge: true});
+  }
+}
+
+
 export {
   doCreateUserWithEmailAndPassword,
   doSocialSignIn,
