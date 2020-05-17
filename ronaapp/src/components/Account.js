@@ -5,8 +5,7 @@ import '../App.css';
 import { AuthContext } from '../firebase/Auth';
 import { getUser, getUserItems } from '../firebase/FirebaseFunc';
 import Container from '@material-ui/core/Container';
-import { Button, Card, CardContent, Typography, List, ListItem, ListItemText } from '@material-ui/core';
-import { Typography, Box } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Typography, List, ListItem, ListItemText } from '@material-ui/core';
 
 function Account() {
     const { currentUser } = useContext(AuthContext);
