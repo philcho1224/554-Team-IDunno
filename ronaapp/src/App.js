@@ -30,20 +30,20 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#eee'
+      default: '#f0f0f0'
     },
     primary: {
-      main: '#00695c'
+      main: '#0093c4'
     },
     secondary: {
-      main: '#E33E7F'
+      main: '#e0f7fa'
     }
   }
 });
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
-    background: '#2E3B55',
+    background: '#0093c4',
   },
   grow: {
     flexGrow: 1,

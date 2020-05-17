@@ -1,0 +1,9 @@
+{
+    "commands": {
+        "modulate": "115, 0, 100",
+        "colorize": "7, 21, 50"
+    },
+    "processes": 10,
+    "library": "imagemagick",
+    "outputDirectory": "./changed"
+}

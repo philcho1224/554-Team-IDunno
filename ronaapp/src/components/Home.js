@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Compress from "./PictureManip"
 
 import {
   ValueAxis,
@@ -132,6 +133,7 @@ class Home extends React.Component {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Typography variant="h3">COVID-19 Stats</Typography>
+            <Compress/>
             <Typography variant="subtitle1">
               All data retrieved from <a href="https://covid19-api.com">covid19-api.com</a>
             </Typography>
