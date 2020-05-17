@@ -73,8 +73,6 @@ async function getAllItems(){
     itemArray.push(doc.data());
   });
   
-  console.log("TESTING");
-  console.log(itemArray);
   return itemArray;
 }
 async function addItem(itemObject){
@@ -111,6 +109,30 @@ async function getWantItems(uid) {
   console.log(wantItems);
   return wantItems;
 } 
+async function getUserItems(userEmail){
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const database = await marketCollection.where('email', '==', userEmail).get();
+  let itemArray = [];
+  database.forEach(doc => {
+    itemArray.push(doc.data());
+  });
+  console.log("UserItems" , itemArray);
+  return itemArray;
+}
+async function deleteItem(userEmail, itemId){
+  console.log("ItemID,", itemId)
+  const db = firebase.firestore();
+  let marketCollection = db.collection("marketItems");
+  const getItem  = await marketCollection.doc(itemId).get();
+  console.log(getItem.data());
+  if(getItem.data().email !== userEmail){
+    console.log("Cant delete item that is not yours")
+  }
+  else{
+    const deleteItem = await marketCollection.doc(itemId).delete();
+  }
+}
 
 export {
   doCreateUserWithEmailAndPassword,
@@ -122,5 +144,7 @@ export {
   doChangePassword, 
   getUser,
   updateCity,
-  getWantItems
+  getWantItems,
+  getUserItems,
+  deleteItem
 };
