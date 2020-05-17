@@ -1,29 +1,29 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { getAllItems, addItem, getUser, deleteItem, getUserItems } from '../firebase/FirebaseFunc';
 import { AuthContext } from '../firebase/Auth';
-import Card from '@material-ui/core/Card';
-import { makeStyles } from '@material-ui/core/styles';
+import {Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Grid} from '@material-ui/core';
+import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from  '@material-ui/core';
+
+import * as google from 'google-parser'
+// const imageSearch = require('image-search-google');
+import * as imageSearch from 'image-search-google';
 import clsx from 'clsx';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
+import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 // const axios = require('axios');
 // const {Storage} = require('@google-cloud/storage');
 import * as Storage from '@google-cloud/storage';
 import * as storage from '@google-cloud/storage';
-import axios from 'axios';
-
-
+import * as axios from 'axios';
+import { Redirect } from 'react-router-dom';
+// import * as  Scraper from 'images-scraper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+  },
+  cardContainer:{
+    display: "flex"
   },
   media: {
     height: 0,
@@ -53,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
 // }
 
 
+
 const ShowItems = () => {
-  
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -66,11 +66,30 @@ const ShowItems = () => {
   console.log("CurrentUser UID:" , currentUser.uid);
   const [marketItems, setMarketItems] = useState(undefined);
   const [usrInfo, setUsrInfo] = useState(undefined);
+  const [redirect, setRedirect] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   async function deleteIt(){
     await deleteItem("hello","2rdsnxrzmS47UJEduoid");
   }
   async function userItems(){
     await getUserItems(usrInfo.email);
+  }
+  async function getImage(image){
+    const client = new imageSearch('006652411016456664611:esbhjblxvz6', 'AIzaSyANzy7uYHb-BEzcBkjxGVQLKWfpf3f5eEo');
+    const options = {page:1};
+    let imageResult = await client.search(image, options);
+    let sliceIndex = imageResult[0].url.search(".jpeg");
+    let imageString = imageResult[0].url.substr(0,sliceIndex + 5);
+    return imageString;
+    
   }
   useEffect(() => {
     async function getUserInfo(uid){
@@ -100,32 +119,33 @@ const ShowItems = () => {
     getItems();
     getUserInfo(currentUser.uid);
     console.log("UsrInfo In Effect" ,usrInfo);
-  }, []
+  }, [currentUser.uid]
   );
   console.log("UsrInfo",usrInfo);
   if(usrInfo){
     console.log("This is user info", usrInfo);
   }
+  if(redirect === true){
+    return <Redirect to="/market" />;
+  }
   console.log(marketItems);
 
   const handleNewPost = async (event) => {
+    
+    console.log("EVENT: ", event);
     event.preventDefault();
-    let {name, description, tradeitem1, tradeitem2, tradeitem3, image} = event.target.elements;
-    console.log("NewName: ", name);
-    console.log(image);
-    console.log(image.value);
-    // try{
-    //   await uploadFile(image);
-    // }
-    // catch(e){
-    //   console.log(e);
-    // }
+
+    let {name, description, tradeitem1, tradeitem2, tradeitem3} = event.target.elements;
+    let imageString = await getImage(name.value);
+
     let itemObject = {
       name: name.value,
       user: usrInfo.username,
       email: usrInfo.email,
       description: description.value,
-      tradeitems: [tradeitem1.value, tradeitem2.value, tradeitem3.value]
+      tradeitems: [tradeitem1.value, tradeitem2.value, tradeitem3.value],
+      image: imageString
+      // image: results[0].url
     }
     console.log("ItemObject");
     console.log(itemObject);
@@ -136,12 +156,15 @@ const ShowItems = () => {
     catch(error){
       console.log(error);
     }
+    handleClose();
+    // setRedirect(true);
+
   };
   let cards = null;
   cards = marketItems && marketItems.map((value, index) => {
     console.log("Value: ", value);
     return(
-      <div>
+      <Grid item xs={4}>
         <Card className={classes.root}>
       <CardHeader
         title= {value.name}
@@ -149,13 +172,28 @@ const ShowItems = () => {
       />
       <CardMedia
         className={classes.media}
-        image="placeHolder image"
-        title="placeholde imager"
+        image={value.image}
+        title={value.name}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {value.description}
         </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Trade Items:
+        </Typography>
+        <Grid container spacing={4}>
+          <Grid item xs = {4}>
+            {value.tradeitems[0]}
+          </Grid>
+          <Grid item xs = {4}>
+            {value.tradeitems[1]}
+          </Grid>
+          <Grid item xs = {4}>
+            {value.tradeitems[2]}
+          </Grid>
+        </Grid>
+
       </CardContent>
       <CardActions disableSpacing>
         <IconButton
@@ -186,17 +224,18 @@ const ShowItems = () => {
 
           })};
       </Card> */}
-      </div>
+      </Grid>
     )
   });
-  if(usrInfo){
     return (
       <div>
-        <h1>This is marketplace</h1>
-       {cards}
-  
-  
-        <form onSubmit= {handleNewPost}>
+        <h1>Marketplace</h1>
+        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Create New Post
+        </Button>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">New Post</DialogTitle>
+        <form onSubmit = {handleNewPost}>
           <div className = "form-group">
             <label>
               Name:
@@ -257,29 +296,26 @@ const ShowItems = () => {
                       />
                   </label>
               </div>
-              <div className = "form-group">
-                <label>
-                  Image
-                  <input
-                  className="form-control"
-                  name="image"
-                  type="file"
-                  required
-                  />
-                </label>
-              </div>
-          <button type="submit">Create Post</button>
+              <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+          <Button type="submit">Create Post</Button>
       </form>
+        </Dialog>
+
+
+        <Grid container spacing={4}>
+          {cards}
+          
+        </Grid>
+  
+       
       <button onClick={deleteIt}>Delete Item</button>
       <button onClick={userItems}>Show User Item</button>
       </div>
     );
-  }
-  else{
-    return(
-      <div></div>
-    )
-  }
+  
+ 
   
 
 }
