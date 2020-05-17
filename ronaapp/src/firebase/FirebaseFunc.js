@@ -72,7 +72,7 @@ async function getAllItems(){
   database.forEach(doc => {
     itemArray.push(doc.data());
   });
-  
+
   return itemArray;
 }
 async function addItem(itemObject){
@@ -91,7 +91,7 @@ async function getUser(uid) {
     console.log('fdsvsdfv')
   }
   else {
-    return userInfo.data();  
+    return userInfo.data();
   }
 }
 
@@ -108,7 +108,7 @@ async function getWantItems(uid) {
   const wantItems = await db.collection('users').doc(uid).collection('wantItem').get();
   console.log(wantItems);
   return wantItems;
-} 
+}
 async function getUserItems(userEmail){
   const db = firebase.firestore();
   let marketCollection = db.collection("marketItems");
@@ -141,10 +141,12 @@ export {
   doPasswordReset,
   doPasswordUpdate,
   doSignOut,
-  doChangePassword, 
+  doChangePassword,
   getUser,
   updateCity,
   getWantItems,
   getUserItems,
-  deleteItem
+  deleteItem,
+  addItem,
+  getAllItems
 };
