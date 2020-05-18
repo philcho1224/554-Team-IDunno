@@ -6,32 +6,24 @@ const client = algoliasearch("NW00BIZJ9O", "73ab8c260b27b919c60e626eaad30649");
 const index = client.initIndex("marketitems");
 
 /********************** Auth Functions ***********************/
-function doCreateUserWithEmailAndPassword(email, password, displayName) {
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-  .then(
-    function(responceData) {
-      const { user } = responceData;
-      const userUID = user.uid;
-      const userEmail = user.email;
+async function doCreateUserWithEmailAndPassword(email, password, displayName) {
+  let userID = await firebase.auth().createUserWithEmailAndPassword(email, password);
+  const { user } = userID;
+  const userUID = user.uid;
+  const userEmail = user.email;
+  const db = firebase.firestore();
+  let marketCollection = db.collection("users");
+  let account = {
+    username: displayName,
+    email: userEmail
+  }
+  console.log("ACCOUNT", account);
+  console.log("USERUID", userUID);
+  const insertItem = await marketCollection.doc(userUID).set(account);
 
-      console.log(user);
-      console.log(`newUser's uid is ${userUID}`);
-
-      const account = {
-        username: displayName,
-        email: userEmail
-      }
-      firebase.firestore().collection('users').doc(userUID).set(account);
-      // responceData.updateProfile({ displayName: displayName });
-    }
-  )
-  .catch(function(error) {
-    var errCode = error.code;
-    var errMsg = error.message;
-    console.log(`create user with error code ${errCode}, msg: ${errMsg}`);
-  })
-  ;
+  // await firebase.firestore().collection('users').doc(userUID).add(account);
 }
+
 
 async function doChangePassword(email, oldPassword, newPassword) {
   let credential = firebase.auth.EmailAuthProvider.credential(
@@ -131,22 +123,16 @@ async function getUserItems(userEmail){
   return itemArray;
 }
 
+
+
 async function deleteItem(userEmail, itemName){
   const db = firebase.firestore();
-  let marketCollection = db.collection("marketItems");
-  const getItemId = await marketCollection.where("name", "==", itemName).where("email", "==", userEmail).get();
-  const docRefId = getItemId.docs[0].id;
-  await marketCollection.doc(docRefId).get();
-
-  // if(getItem.data().email !== userEmail){
-  //   console.log("Cant delete item that is not yours")
-  // }
-  // else{
-  //   // const deleteItem = await marketCollection.doc(itemId).delete();
-  //   // const indexDelete = await index.deleteObject(itemId);
-  // }
+  const ref = await db.collection("marketItems").where("email", "==", userEmail).where("name", "==", itemName).get();
+  const docRefId = ref.docs[0].id;
+  const getItem  = await db.collection("marketItems").doc(docRefId).get();
+  console.log(getItem.data());
+  await db.collection("marketItems").doc(docRefId).delete();
 }
-
 
 async function editUserProfile(userID, editObject){
   const db = firebase.firestore();
@@ -154,21 +140,6 @@ async function editUserProfile(userID, editObject){
   let setWithOptions = await marketCollection.doc(userID).set(editObject, {merge: true});
 
 }
-
-async function editItem(userEmail, itemID, editObject){
-  const db = firebase.firestore();
-  let marketCollection = db.collection("marketItems");
-  const getItem  = await marketCollection.doc(itemID).get();
-  console.log(getItem.data());
-  if(getItem.data().email !== userEmail){
-    console.log("Cant delete item that is not yours")
-  }
-  else{
-    let setWithOptions = await marketCollection.doc(itemID).set(editObject, {merge: true});
-  }
-}
-
-
 export {
   doCreateUserWithEmailAndPassword,
   doSocialSignIn,
@@ -182,5 +153,6 @@ export {
   getUserItems,
   deleteItem,
   addItem,
-  getAllItems
+  getAllItems,
+  editUserProfile
 };

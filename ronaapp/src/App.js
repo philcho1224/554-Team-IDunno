@@ -109,7 +109,7 @@ function App() {
           <Navigation />
 
           <Route exact path = '/' component = {Home}/>
-          <Route exact path = '/market' component = {showItems}/>
+          <PrivateRoute path = '/market' component = {showItems}/>
           <PrivateRoute path = '/account' component = {Account} />
           <Route exact path = '/signin' component = {SignIn} />
           <Route path = '/signup' component = {SignUp} />

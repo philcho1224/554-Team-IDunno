@@ -67,9 +67,9 @@ function SignIn() {
                     </Box>
                     <Box mt={1}>
                         <Grid container fullWidth>
-                            <Grid item xs>
+                            {/* <Grid item xs>
                                 <SocialSignIn />
-                            </Grid>
+                            </Grid> */}
                             <Grid item>
                                 <Button onClick={passwordReset}>
                                     Forgot Password

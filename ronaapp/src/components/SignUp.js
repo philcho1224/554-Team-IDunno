@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { doCreateUserWithEmailAndPassword } from '../firebase/FirebaseFunc';
 import { AuthContext } from '../firebase/Auth';
-import SocialSignIn from './SocialSignIn';
+// import SocialSignIn from './SocialSignIn';
 import { FormControl, InputLabel, Input, FormHelperText, Button } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
@@ -25,7 +25,7 @@ function SignUp() {
             await doCreateUserWithEmailAndPassword(
                 email.value,
                 passwordOne.value,
-                displayName
+                displayName.value
             );
         } catch (error) {
             alert(error);
@@ -77,9 +77,9 @@ function SignUp() {
                         <Button type="submit" variant="contained" color="primary" fullWidth>
                             Sign Up
                         </Button>
-                        <Box mt={1}>
+                        {/* <Box mt={1}>
                             <SocialSignIn />
-                        </Box>
+                        </Box> */}
                     </Box>
 
 
