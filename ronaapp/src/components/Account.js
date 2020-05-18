@@ -126,8 +126,10 @@ function Account() {
 
                     <p className="bold"> My Items: </p>
                     {cards}
-                    <PwdReset />
-                    <SignOutBtn />
+                    <Box mt={10}>
+                        <PwdReset />
+                        <SignOutBtn />
+                    </Box>
 
                 </Container>
             </div>
@@ -140,8 +142,10 @@ function Account() {
                         <Typography variant="h2">Profile Page</Typography>
                     </Box>
                     <p>User Data wasn't detected </p>
-                    <PwdReset />
-                    <SignOutBtn />
+                    <Box mt={10}>
+                        <PwdReset />
+                        <SignOutBtn />
+                    </Box>
                 </Container>
             </div>
         );
