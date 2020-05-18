@@ -3,9 +3,9 @@ import SignOutBtn from './SignOut';
 import PwdReset from './PwdReset';
 import '../App.css';
 import { AuthContext } from '../firebase/Auth';
-import { getUser, getUserItems } from '../firebase/FirebaseFunc';
+import { getUser, getUserItems,  deleteItem} from '../firebase/FirebaseFunc';
 import Container from '@material-ui/core/Container';
-import { Box, Card, CardContent, Typography, List, ListItem, ListItemText } from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardActions, CardHeader, CardMedia, Grid, Typography} from '@material-ui/core';
 
 function Account() {
     const { currentUser } = useContext(AuthContext);
@@ -28,7 +28,7 @@ function Account() {
             let trades;
             try {
                 let info = await getUserItems(email);
-                trades = info[0].tradeitems
+                trades = info;
                 console.log(trades);
                 setTrades(trades);
             } catch (error) {
@@ -38,31 +38,47 @@ function Account() {
 
         getUserInfo(currentUser.uid);
         getItems(currentUser.email);
-        // console.log(userInfo);
-        // console.log(trades);
-        // console.log(`userInfooooooooo is ${userInfo}`);
-        // console.log(`traaaaaaades is ${trades}`);
     }, []);
 
     let cards = null;
     if (trades) {
         cards = trades && trades.map((value, index) => {
             return (
-                // <Card>
-                //     <CardContent>
-                //         <Typography>
-                //             {value}
-                //         </Typography>
-                //     </CardContent>
-                // </Card>
+                <Card>
+                    <CardHeader 
+                        title={"Want Item: " + value.name}
+                    />
+                    <CardMedia 
+                        image={value.image}
+                        title={value.name}
+                    />
+                    
+                    <CardContent>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {value.description ? "Description: " + value.description : " "}
+                            
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            Availble to trade: 
+                        </Typography>
+                        <Grid container spacing={4}>
+                            <Grid item xs = {4}>
+                                {value.tradeitems[0]}
+                            </Grid>
+                            <Grid item xs = {4}>
+                                {value.tradeitems[1]}
+                            </Grid>
+                            <Grid item xs = {4}>
+                                {value.tradeitems[2]}
+                            </Grid>
+                        </Grid>
+                        <CardActions>
+                            <Button>Edit</Button>
+                            <Button onClick={() => deleteItem(value.email, value.name)}>Delete</Button>
+                        </CardActions>
 
-                <List>
-                    <ListItem>
-                        <ListItemText>
-                            {value}
-                        </ListItemText>
-                    </ListItem>
-                </List>
+                    </CardContent>
+                </Card>
             )
         })
     } else {
@@ -74,7 +90,7 @@ function Account() {
                             You have not added any trade items.
                         </Typography>
                     </CardContent>
-                </Card>
+                </Card> 
             )
         }
     }
@@ -89,14 +105,13 @@ function Account() {
                     <Box mt={3}>
                         <Typography variant="h2">Profile Page</Typography>
                     </Box>
-                    <p>Profile Pic </p>
                     <p>Username: </p>
-                    {userInfo.username}
+                        {userInfo.username}
                     <p>Email: </p>
-                    {userInfo.email}
+                        {userInfo.email}
                     <br />
-            <p> My Trades: </p>
-                {cards}
+                    <p> My Items: </p>
+                        {cards}
                     <PwdReset />
                     <SignOutBtn />
 
@@ -111,7 +126,6 @@ function Account() {
                         <Typography variant="h2">Profile Page</Typography>
                     </Box>
                     <p>User Data didn't detected </p>
-                    <p>Post: </p>
                     <PwdReset />
                     <SignOutBtn />
                 </Container>
