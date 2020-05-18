@@ -3,9 +3,9 @@ import SignOutBtn from './SignOut';
 import PwdReset from './PwdReset';
 import '../App.css';
 import { AuthContext } from '../firebase/Auth';
-import { getUser, getUserItems,  deleteItem} from '../firebase/FirebaseFunc';
+import { getUser, getUserItems, deleteItem } from '../firebase/FirebaseFunc';
 import Container from '@material-ui/core/Container';
-import { Box, Button, Card, CardContent, CardActions, CardHeader, CardMedia, Grid, Typography} from '@material-ui/core';
+import { Box, Button, Card, CardContent, CardActions, CardHeader, CardMedia, Grid, Typography } from '@material-ui/core';
 
 function Account() {
     const { currentUser } = useContext(AuthContext);
@@ -44,41 +44,43 @@ function Account() {
     if (trades) {
         cards = trades && trades.map((value, index) => {
             return (
-                <Card>
-                    <CardHeader 
-                        title={"Want Item: " + value.name}
-                    />
-                    <CardMedia 
-                        image={value.image}
-                        title={value.name}
-                    />
-                    
-                    <CardContent>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {value.description ? "Description: " + value.description : " "}
-                            
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Availble to trade: 
-                        </Typography>
-                        <Grid container spacing={4}>
-                            <Grid item xs = {4}>
-                                {value.tradeitems[0]}
-                            </Grid>
-                            <Grid item xs = {4}>
-                                {value.tradeitems[1]}
-                            </Grid>
-                            <Grid item xs = {4}>
-                                {value.tradeitems[2]}
-                            </Grid>
-                        </Grid>
-                        <CardActions>
-                            <Button>Edit</Button>
-                            <Button onClick={() => deleteItem(value.email, value.name)}>Delete</Button>
-                        </CardActions>
+                <Box mt={4}>
+                    <Card >
+                        <CardHeader
+                            title={"Want Item: " + value.name}
+                        />
+                        <CardMedia
+                            image={value.image}
+                            title={value.name}
+                        />
 
-                    </CardContent>
-                </Card>
+                        <CardContent>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {value.description ? "Description: " + value.description : " "}
+
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                Availble to trade:
+                        </Typography>
+                            <Grid container spacing={4}>
+                                <Grid item xs={4}>
+                                    {value.tradeitems[0]}
+                                </Grid>
+                                <Grid item xs={4}>
+                                    {value.tradeitems[1]}
+                                </Grid>
+                                <Grid item xs={4}>
+                                    {value.tradeitems[2]}
+                                </Grid>
+                            </Grid>
+                            <CardActions>
+                                <Button>Edit</Button>
+                                <Button onClick={() => { deleteItem(value.email, value.name) }}>Delete</Button>
+                            </CardActions>
+
+                        </CardContent>
+                    </Card>
+                </Box>
             )
         })
     } else {
@@ -90,7 +92,7 @@ function Account() {
                             You have not added any trade items.
                         </Typography>
                     </CardContent>
-                </Card> 
+                </Card>
             )
         }
     }
@@ -105,13 +107,25 @@ function Account() {
                     <Box mt={3}>
                         <Typography variant="h2">Profile Page</Typography>
                     </Box>
-                    <p>Username: </p>
-                        {userInfo.username}
-                    <p>Email: </p>
-                        {userInfo.email}
-                    <br />
-                    <p> My Items: </p>
-                        {cards}
+                    <Grid container>
+                        <Grid item className="bold">
+                            Username:
+                        </Grid>
+                        <Grid item>
+                            {userInfo.username}
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                        <Grid item className="bold">
+                            Email:
+                        </Grid>
+                        <Grid item>
+                            {userInfo.email}
+                        </Grid>
+                    </Grid>
+
+                    <p className="bold"> My Items: </p>
+                    {cards}
                     <PwdReset />
                     <SignOutBtn />
 
@@ -125,7 +139,7 @@ function Account() {
                     <Box mt={3}>
                         <Typography variant="h2">Profile Page</Typography>
                     </Box>
-                    <p>User Data didn't detected </p>
+                    <p>User Data wasn't detected </p>
                     <PwdReset />
                     <SignOutBtn />
                 </Container>

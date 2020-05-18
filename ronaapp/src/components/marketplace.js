@@ -226,7 +226,6 @@ const ShowItems = () => {
     setOpen(false);
 
     console.log("here");
-    window.location.reload(false);
 
     // setRedirect(true);
 
@@ -323,7 +322,7 @@ const ShowItems = () => {
           <DialogTitle id="form-dialog-title">New Post</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Provide the name and description of the item along with items you are seeking! (Someone make sure i have this the right way or is it the other way around)
+              Provide the name and description of the item along with items you are seeking
             </DialogContentText>
             <form onSubmit={handleNewPost}>
 
@@ -366,7 +365,7 @@ const ShowItems = () => {
 
               <DialogActions>
                 <Button onClick={handleClose} color="primary">Cancel</Button>
-                <Button type="submit" color="primary">Create Post</Button>
+                <Button type="submit" variant="outlined" color="secondary">Create Post</Button>
               </DialogActions>
             </form>
           </DialogContent>
