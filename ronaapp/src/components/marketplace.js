@@ -155,9 +155,11 @@ const ShowItems = () => {
             <Typography variant="body2" color="textSecondary" component="p">
               {hit.description}
             </Typography>
+            <Box mt={2}>
             <Typography variant="body2" color="textSecondary" component="p">
               Trade Items:
           </Typography>
+            </Box>
             <Grid container spacing={4}>
               <Grid item xs={4}>
                 {hit.tradeitems[0]}
