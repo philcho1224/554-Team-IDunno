@@ -14,7 +14,13 @@ import { Redirect } from 'react-router-dom';
 import { Fab } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 import Container from '@material-ui/core/Container';
+import Background from './changed/market.jpg';
 
+const sectionStyle = {
+  width: "100%",
+  height: "500px",
+  backgroundImage: `url(${Background})`
+};
 
 const client = algoliasearch("NW00BIZJ9O", "73ab8c260b27b919c60e626eaad30649");
 
@@ -287,9 +293,9 @@ const ShowItems = () => {
     )
   });
   return (
-    <div>
+    <div style={sectionStyle}>
       <Container component="main" maxWidth="lg" >
-        <Box mt={3}>
+        <Box  pt={4}>
           <Typography variant="h3">Marketplace</Typography>
         </Box>
 
@@ -302,7 +308,7 @@ const ShowItems = () => {
             <SearchBox translations={{ placeholder: 'Search Box' }} />
           </header>
           <main>
-            <Content />
+            <Content/>
           </main>
 
         </InstantSearch>
