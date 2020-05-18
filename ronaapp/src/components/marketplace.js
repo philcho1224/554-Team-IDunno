@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { getAllItems, addItem, getUser, deleteItem, getUserItems } from '../firebase/FirebaseFunc';
 import { AuthContext } from '../firebase/Auth';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Grid } from '@material-ui/core';
-import { Button, FormControl, FormHelperText, InputLabel, Input, TextField, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Button, FormControl, FormHelperText, InputLabel, Input, Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { InstantSearch, SearchBox, Hits, Highlight, connectHits } from 'react-instantsearch-dom';
 import * as algoliasearch from 'algoliasearch';
 import * as imageSearch from 'image-search-google';
@@ -171,7 +171,7 @@ const ShowItems = () => {
               Contact Info: {hit.email}
           </Typography>
           </CardContent>
-          
+
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph>Contact Info:</Typography>
@@ -296,7 +296,7 @@ const ShowItems = () => {
           indexName="marketitems"
         >
           <header>
-            <label for="searchBox">Search</label>
+            {/* <label for="searchBox">Search</label> */}
             <SearchBox  translations={{ id: 'searchBox', placeholder: 'Search Box' }}  />
           </header>
           <main>
@@ -305,10 +305,10 @@ const ShowItems = () => {
 
         </InstantSearch>
 
-        <Fab variant="extended" color="primary" onClick={handleClickOpen} id="createPostButton">
+        <Fab variant="round" color="primary" onClick={handleClickOpen} id="createPostButton">
           <AddIcon />
-          Create Post
         </Fab>
+        <label htmlFor="createPostButton" class="accessLabel">Add Post</label>
 
 
 

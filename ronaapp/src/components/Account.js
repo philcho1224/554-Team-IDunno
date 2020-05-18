@@ -5,7 +5,9 @@ import '../App.css';
 import { AuthContext } from '../firebase/Auth';
 import { getUser, getUserItems,  deleteItem} from '../firebase/FirebaseFunc';
 import Container from '@material-ui/core/Container';
+
 import { Box, Button, Card, CardContent, CardActions, CardHeader, CardMedia, Grid, Typography} from '@material-ui/core';
+
 
 function Account() {
     const { currentUser } = useContext(AuthContext);
@@ -90,7 +92,7 @@ function Account() {
                             You have not added any trade items.
                         </Typography>
                     </CardContent>
-                </Card> 
+                </Card>
             )
         }
     }
