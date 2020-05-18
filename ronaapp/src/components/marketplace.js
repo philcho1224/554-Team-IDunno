@@ -295,8 +295,8 @@ const ShowItems = () => {
   return (
     <div style={sectionStyle}>
       <Container component="main" maxWidth="lg" >
-        <Box  pt={4}>
-          <Typography variant="h3">Marketplace</Typography>
+        <Box pt={4}>
+          <Typography variant="h2">Marketplace</Typography>
         </Box>
 
         <InstantSearch
@@ -305,7 +305,8 @@ const ShowItems = () => {
           indexName="marketitems"
         >
           <header>
-            <SearchBox translations={{ placeholder: 'Search Box' }} />
+            <label for="searchBox">Search</label>
+            <SearchBox  translations={{ id: 'searchBox', placeholder: 'Search Box' }}  />
           </header>
           <main>
             <Content/>
@@ -313,7 +314,7 @@ const ShowItems = () => {
 
         </InstantSearch>
 
-        <Fab variant="extended" color="primary" onClick={handleClickOpen}>
+        <Fab variant="extended" color="primary" onClick={handleClickOpen} id="createPostButton">
           <AddIcon />
           Create Post
         </Fab>
