@@ -78,6 +78,7 @@ const ShowItems = () => {
     setOpen(true);
   };
 
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -97,6 +98,7 @@ const ShowItems = () => {
 
   }
   useEffect(() => {
+    console.log("ATTENTION")
     async function getUserInfo(uid) {
       let userInfo;
       try {
@@ -220,7 +222,12 @@ const ShowItems = () => {
     catch (error) {
       console.log(error);
     }
-    handleClose();
+    // handleClose();
+    setOpen(false);
+
+    console.log("here");
+    window.location.reload(false);
+
     // setRedirect(true);
 
   };
@@ -334,7 +341,7 @@ const ShowItems = () => {
 
 
               <Box mt={4}>
-                <Grid container fullWidth>
+                <Grid container>
                   <Grid item xs>
                     <FormControl fullWidth>
                       <InputLabel htmlFor="tradeitem1">Trade Item 1</InputLabel>
@@ -357,9 +364,6 @@ const ShowItems = () => {
                 </Grid>
               </Box>
 
-              <Button onClick={handleClose} color="primary">Cancel</Button>
-              <Button type="submit">Create Post</Button>
-
               <DialogActions>
                 <Button onClick={handleClose} color="primary">Cancel</Button>
                 <Button type="submit" color="primary">Create Post</Button>
@@ -368,6 +372,7 @@ const ShowItems = () => {
           </DialogContent>
 
         </Dialog>
+
 
       </Container>
     </div>

@@ -32,10 +32,10 @@ const theme = createMuiTheme({
       default: '#eeefff'
     },
     primary: {
-      main: '#bf5f82'
+      main: '#d81b60'
     },
     secondary: {
-      main: '#E33E7F'
+      main: '#0075a2'
     }
   }
 });

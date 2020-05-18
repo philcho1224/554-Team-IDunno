@@ -14,7 +14,7 @@ const SocialSignIn = () => {
 
     return (
         <div>
-            <Button type="button"  color="primary" onClick={() => socialSignOn('google')}>
+            <Button type="button"  color="secondary" onClick={() => socialSignOn('google')}>
                 Sign In with Google
             </Button>
         </div>
