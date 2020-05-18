@@ -74,6 +74,10 @@
     width           : 39px;
     margin-left     : 8px;
 }
+
+.accessLabel{
+  visibility: hidden;
+}
 /*
 #createPostButton{
 } */
