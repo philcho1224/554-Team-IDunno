@@ -302,8 +302,8 @@ const ShowItems = () => {
           indexName="marketitems"
         >
           <header>
-            {/* <label for="searchBox">Search</label> */}
-            <SearchBox  translations={{ id: 'searchBox', placeholder: 'Search Box' }}  />
+            <label>
+            <SearchBox  translations={{ id: 'searchBox', placeholder: 'Search Box' }}  /></label>
           </header>
           <main>
             <Content/>
