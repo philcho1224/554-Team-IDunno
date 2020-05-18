@@ -1,6 +1,10 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
+import * as algoliasearch from 'algoliasearch';
+const client = algoliasearch("NW00BIZJ9O", "73ab8c260b27b919c60e626eaad30649");
+const index = client.initIndex("marketitems");
+
 /********************** Auth Functions ***********************/
 function doCreateUserWithEmailAndPassword(email, password, displayName) {
   firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -79,8 +83,21 @@ async function addItem(itemObject){
   const db = firebase.firestore();
   let marketCollection = db.collection("marketItems");
   const insertItem = await marketCollection.add(itemObject);
+  console.log("THIS IS INSERTED ITEM", insertItem);
+  let algoliaObject = 
+    {
+      objectID: insertItem.id,
+      name: itemObject.name,
+      user: itemObject.user,
+      email: itemObject.email,
+      description: itemObject.description,
+      tradeitems: itemObject.tradeitems,
+      image: itemObject.image
+    };
+  const indexInsert = await index.saveObject(algoliaObject);
   console.log("Added item with ID: ", insertItem.id);
 }
+
 
 /********************** DB Functions ***********************/
 async function getUser(uid) {
@@ -114,19 +131,22 @@ async function getUserItems(userEmail){
   return itemArray;
 }
 
-async function deleteItem(userEmail, itemId){
-  console.log("ItemID,", itemId)
+async function deleteItem(userEmail, itemName){
   const db = firebase.firestore();
   let marketCollection = db.collection("marketItems");
-  const getItem  = await marketCollection.doc(itemId).get();
-  console.log(getItem.data());
-  if(getItem.data().email !== userEmail){
-    console.log("Cant delete item that is not yours")
-  }
-  else{
-    const deleteItem = await marketCollection.doc(itemId).delete();
-  }
+  const getItemId = await marketCollection.where("name", "==", itemName).where("email", "==", userEmail).get();
+  const docRefId = getItemId.docs[0].id;
+  await marketCollection.doc(docRefId).get();
+
+  // if(getItem.data().email !== userEmail){
+  //   console.log("Cant delete item that is not yours")
+  // }
+  // else{
+  //   // const deleteItem = await marketCollection.doc(itemId).delete();
+  //   // const indexDelete = await index.deleteObject(itemId);
+  // }
 }
+
 
 async function editUserProfile(userID, editObject){
   const db = firebase.firestore();
